@@ -84,11 +84,13 @@ void Bool_Table::Truth_result()
         syc /= 2;
         for (int d = 0; d < syc2; d++)
         {
+
             for (int j = 0; j < syc; j++)
             {
-                if (kit_table[i].back() != kit_table[syc++].back())
+                if (kit_table[i].back() != kit_table[].back())
                 {
                     cout << "Error x"<< i+1 << endl;
+                    break;
                 }
             }
         }
