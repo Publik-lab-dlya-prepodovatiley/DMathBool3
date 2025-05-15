@@ -15,14 +15,16 @@ protected:
 public:
     vector<vector<int>> table;
     vector<vector<int>> kit_table;
+    vector<int> syvar;
     void Table_Result();
     void Bool_Fanc();
-    void Print_table();
-    void Truth_result();
+    void Print_table(vector<int>);
+    int Truth_result();
+
 
 
     Bool_Table(int qv)
-        : quantity_variable(qv){}
+     : quantity_variable(qv){}
 };
 
 

@@ -58,11 +58,21 @@ void Bool_Table::Bool_Fanc()
         while (logicError);
     }
 }
-void Bool_Table::Print_table()
+void Bool_Table::Print_table(vector<int> res)
 {
-    for (int i = 0; i < quantity_variable; i++)
+    if (res.size() != 0)
     {
-        cout << "x" << i+1 << " ";
+        for (int i = 0; i < res.size(); i++)
+        {
+            cout << "x" << res[i] + 1 << " ";
+        }
+    }
+    else
+    {
+        for (int i = 0; i < quantity_variable; i++)
+        {
+            cout << "x" << i+1 << " ";
+        }
     }
     cout << endl;
     for (int i = 0; i < kit_table.size(); i++)
@@ -74,9 +84,9 @@ void Bool_Table::Print_table()
         cout << endl;
     }
 }
-void Bool_Table::Truth_result()
+int Bool_Table::Truth_result()
 {
-    int result;
+    int result = 0;
     int comparisons = static_cast<int>(kit_table.size());
     int block = 1;
 
@@ -94,8 +104,8 @@ void Bool_Table::Truth_result()
                 int iterationb = tempit + comparisons * d * 2;
                 if (kit_table[iterationa].back() != kit_table[iterationb].back())
                 {
-                    cout << endl <<"Error x"<< i+1 << endl;
-
+                    cout << endl <<"syt x"<< i+1 << endl;
+                    syvar.push_back(i);
                     for (int k = 0; k < kit_table[iterationa].size(); k++)
                         cout << kit_table[iterationa][k];
                     cout << " != ";
@@ -119,4 +129,5 @@ void Bool_Table::Truth_result()
         block *= 2;
     }
     cout << endl << "result syt: "<<result << endl;
+    return result;
 }
