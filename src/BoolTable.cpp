@@ -77,23 +77,44 @@ void Bool_Table::Print_table()
 void Bool_Table::Truth_result()
 {
     int result = 0;
-    int syc = kit_table.size();
+    int syc = static_cast<int>(kit_table.size());
     int syc2 = 1;
+
     for (int i = 0; i < quantity_variable; i++)
     {
         syc /= 2;
+        bool logicError = false;
+        cout<<endl;
         for (int d = 0; d < syc2; d++)
         {
-
+            int tempit = syc;
             for (int j = 0; j < syc; j++)
             {
-                if (kit_table[i].back() != kit_table[].back())
+                if (kit_table[j].back() != kit_table[tempit].back())
                 {
-                    cout << "Error x"<< i+1 << endl;
+                    cout << endl <<"Error x"<< i+1 << endl;
+
+                    for (int k = 0; k < kit_table[j].size(); k++)
+                        cout << kit_table[j][k];
+                    cout << " != ";
+                    for (int k = 0; k < kit_table[tempit].size(); k++)
+                        cout << kit_table[tempit][k];
+
+                    logicError = true;
+                    result++;
                     break;
                 }
+                cout<<endl;
+                for (int k = 0; k < kit_table[j].size(); k++)
+                    cout << kit_table[j][k];
+                cout << " == ";
+                for (int k = 0; k < kit_table[tempit].size(); k++)
+                    cout << kit_table[tempit][k];
+                tempit++;
             }
+            if (logicError){break;}
         }
         syc2 *= 2;
     }
+    cout << endl << "result syt: "<<result << endl;
 }
