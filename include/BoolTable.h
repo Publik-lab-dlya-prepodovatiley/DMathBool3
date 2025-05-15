@@ -3,6 +3,9 @@
 #include "iostream"
 #include "vector"
 #include "cmath"
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
 class Bool_Table
@@ -20,7 +23,8 @@ public:
     void Bool_Fanc();
     void Print_table(vector<int>);
     int Truth_result();
-    void true_function(vector<int> temp_kit, vector<vector<int>> kit_table, vector<int> syvar);
+    void Random_Func();
+    void true_function(vector<vector<int>> temp_kit, vector<int> syvar);
 
     Bool_Table(int qv)
      : quantity_variable(qv){}

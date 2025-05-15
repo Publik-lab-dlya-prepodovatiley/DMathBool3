@@ -134,25 +134,35 @@ int Bool_Table::Truth_result()
     cout << endl << "result syt: "<<result << endl;
     return result;
 }
+void Bool_Table::Random_Func()
+{
+    srand(static_cast<unsigned int>(time(nullptr)));
 
-// void Bool_Table::true_function(vector<int> temp_kit, vector<vector<int>> kit_table, vector<int> syvar)
-// {
-//     for (int i = 0; i < kit_table.size(); i++)
-//     {
-//
-//         for (int j = 0; j < temp_kit.size(); j++)
-//         {
-//             int boolfunc = 0;
-//             for (int k = 0; k < syvar.size(); k++)
-//             {
-//                 if (kit_table[i][k] == temp_kit[j][syvar[k]])
-//                     boolfunc++;
-//             }
-//             if (boolfunc == syvar.size())
-//             {
-//                 kit_table[i].push_back(temp_kit[j].back());
-//                 break;
-//             }
-//         }
-//     }
-// }
+    for (int i = 0; i < kit_table.size(); i++)
+    {
+        int func_value = rand() % 2;
+        kit_table[i].push_back(func_value);
+    }
+
+    cout << "Random function f(x) assigned to each row.\n";
+}
+void Bool_Table::true_function(vector<vector<int>> temp_kit, vector<int> syvar)
+{
+    for (int i = 0; i < kit_table.size(); i++)
+    {
+        for (int j = 0; j < temp_kit.size(); j++)
+        {
+            int boolfunc = 0;
+            for (int k = 0; k < syvar.size(); k++)
+            {
+                if (kit_table[i][k] == temp_kit[j][syvar[k]])
+                    boolfunc++;
+            }
+            if (boolfunc == syvar.size())
+            {
+                kit_table[i].push_back(temp_kit[j].back());
+                break;
+            }
+        }
+    }
+}
