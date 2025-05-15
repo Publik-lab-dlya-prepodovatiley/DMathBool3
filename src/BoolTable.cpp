@@ -84,50 +84,77 @@ void Bool_Table::Print_table(vector<int> res)
         cout << endl;
     }
 }
-int Bool_Table::Truth_result()
+int Bool_Table::Truth_result(vector<vector<int>> temp_kit)
 {
-    int result = 0;
-    int comparisons = static_cast<int>(kit_table.size());
-    int block = 1;
-
-    for (int i = 0; i < quantity_variable; i++)
+    if (syvar.size() > 0)
     {
-        comparisons /= 2;
-        bool logicError = false;
-        cout<<endl;
-        for (int d = 0; d < block; d++)
+        int result = 0;
+        int comparisons = static_cast<int>(kit_table.size());
+        int block = 1;
+
+        for (int i = 0; i < quantity_variable; i++)
         {
-            int tempit = comparisons;
-            for (int j = 0; j < comparisons; j++)
+            comparisons /= 2;
+            bool logicError = false;
+            cout<<endl;
+            for (int d = 0; d < block; d++)
             {
-                int iterationa = j + comparisons * d * 2;
-                int iterationb = tempit + comparisons * d * 2;
-                if (kit_table[iterationa].back() != kit_table[iterationb].back())
+                int tempit = comparisons;
+                for (int j = 0; j < comparisons; j++)
                 {
-                    cout << endl <<"syt x"<< i+1 << endl;
-                    syvar.push_back(i);
+                    int iterationa = j + comparisons * d * 2;
+                    int iterationb = tempit + comparisons * d * 2;
+                    if (kit_table[iterationa].back() != kit_table[iterationb].back())
+                    {
+                        cout << endl <<"syt x"<< i+1 << endl;
+                        syvar.push_back(i);
+
+                        for (int k = 0; k < kit_table[iterationa].size(); k++)
+                            cout << kit_table[iterationa][k];
+                        cout << " != ";
+                        for (int k = 0; k < kit_table[iterationb].size(); k++)
+                            cout << kit_table[iterationb][k];
+
+                        logicError = true;
+                        result++;
+                        break;
+                    }
+
+                    cout<<endl;
                     for (int k = 0; k < kit_table[iterationa].size(); k++)
                         cout << kit_table[iterationa][k];
-                    cout << " != ";
+                    cout << " == ";
                     for (int k = 0; k < kit_table[iterationb].size(); k++)
                         cout << kit_table[iterationb][k];
-                    logicError = true;
-                    result++;
-                    break;
+                    tempit++;
                 }
-                cout<<endl;
-                for (int k = 0; k < kit_table[iterationa].size(); k++)
-                    cout << kit_table[iterationa][k];
-                cout << " == ";
-                for (int k = 0; k < kit_table[iterationb].size(); k++)
-                    cout << kit_table[iterationb][k];
-                tempit++;
-            }
 
-            if (logicError){break;}
+                if (logicError){break;}
+            }
+            block *= 2;
         }
-        block *= 2;
+        cout << endl << "result syt: "<<result << endl;
+        return result;
     }
-    cout << endl << "result syt: "<<result << endl;
-    return result;
+
+
+
+    for (int i = 0; i < kit_table.size(); i++)
+    {
+
+        for (int j = 0; j < temp_kit.size(); j++)
+        {
+            int boolfunc = 0;
+            for (int k = 0; k < syvar.size(); k++)
+            {
+                if (kit_table[i][k] == temp_kit[j][syvar[k]])
+                    boolfunc++;
+            }
+            if (boolfunc == syvar.size())
+            {
+                kit_table[i].push_back(temp_kit[j].back());
+                break;
+            }
+        }
+    }
 }

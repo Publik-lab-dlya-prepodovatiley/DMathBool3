@@ -19,9 +19,7 @@ public:
     void Table_Result();
     void Bool_Fanc();
     void Print_table(vector<int>);
-    int Truth_result();
-
-
+    int Truth_result(vector<vector<int>> temp_kit);
 
     Bool_Table(int qv)
      : quantity_variable(qv){}
