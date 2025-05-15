@@ -76,45 +76,47 @@ void Bool_Table::Print_table()
 }
 void Bool_Table::Truth_result()
 {
-    int result = 0;
-    int syc = static_cast<int>(kit_table.size());
-    int syc2 = 1;
+    int result;
+    int comparisons = static_cast<int>(kit_table.size());
+    int block = 1;
 
     for (int i = 0; i < quantity_variable; i++)
     {
-        syc /= 2;
+        comparisons /= 2;
         bool logicError = false;
         cout<<endl;
-        for (int d = 0; d < syc2; d++)
+        for (int d = 0; d < block; d++)
         {
-            int tempit = syc;
-            for (int j = 0; j < syc; j++)
+            int tempit = comparisons;
+            for (int j = 0; j < comparisons; j++)
             {
-                if (kit_table[j].back() != kit_table[tempit].back())
+                int iterationa = j + comparisons * d * 2;
+                int iterationb = tempit + comparisons * d * 2;
+                if (kit_table[iterationa].back() != kit_table[iterationb].back())
                 {
                     cout << endl <<"Error x"<< i+1 << endl;
 
-                    for (int k = 0; k < kit_table[j].size(); k++)
-                        cout << kit_table[j][k];
+                    for (int k = 0; k < kit_table[iterationa].size(); k++)
+                        cout << kit_table[iterationa][k];
                     cout << " != ";
-                    for (int k = 0; k < kit_table[tempit].size(); k++)
-                        cout << kit_table[tempit][k];
-
+                    for (int k = 0; k < kit_table[iterationb].size(); k++)
+                        cout << kit_table[iterationb][k];
                     logicError = true;
                     result++;
                     break;
                 }
                 cout<<endl;
-                for (int k = 0; k < kit_table[j].size(); k++)
-                    cout << kit_table[j][k];
+                for (int k = 0; k < kit_table[iterationa].size(); k++)
+                    cout << kit_table[iterationa][k];
                 cout << " == ";
-                for (int k = 0; k < kit_table[tempit].size(); k++)
-                    cout << kit_table[tempit][k];
+                for (int k = 0; k < kit_table[iterationb].size(); k++)
+                    cout << kit_table[iterationb][k];
                 tempit++;
             }
+
             if (logicError){break;}
         }
-        syc2 *= 2;
+        block *= 2;
     }
     cout << endl << "result syt: "<<result << endl;
 }
