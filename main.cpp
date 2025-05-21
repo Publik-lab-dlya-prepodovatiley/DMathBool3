@@ -22,15 +22,11 @@ int main()
         if (mode == static_cast<int>(Mode::RANDOM))
             table.Random_Func();
 
-    }while (mode == 1 || mode == 2);
+    }while (mode != 1 && mode != 2);
 
     table.Print_table(table.syvar);
-    Bool_Table truetable(table.Truth_result());
-    truetable.Table_Result();
-    cout << endl << "true table:"<<endl;
-    truetable.true_function(table.kit_table, table.syvar);
-    truetable.Print_table(table.syvar);
-
+    cout << "1 - manual  ||  2 - randomly" << endl;
+    table.Kvine_Mak_Klaski();
     cin.get();
     return 0;
 }

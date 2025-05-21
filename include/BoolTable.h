@@ -21,10 +21,10 @@ public:
     vector<int> syvar;
     void Table_Result();
     void Bool_Fanc();
-    void Print_table(vector<int>);
-    int Truth_result();
     void Random_Func();
-    void true_function(vector<vector<int>> temp_kit, vector<int> syvar);
+    void Print_table(vector<int>);
+    void Kvine_Mak_Klaski();
+
 
     Bool_Table(int qv)
      : quantity_variable(qv){}

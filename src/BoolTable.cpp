@@ -31,6 +31,7 @@ void Bool_Table::Table_Result()
         }
         kit_table.push_back(temp_kit);
     }
+    table.clear();
 }
 void Bool_Table::Bool_Fanc()
 {
@@ -84,56 +85,6 @@ void Bool_Table::Print_table(vector<int> res)
         cout << endl;
     }
 }
-int Bool_Table::Truth_result()
-{
-    int result = 0;
-    int comparisons = static_cast<int>(kit_table.size());
-    int block = 1;
-
-    for (int i = 0; i < quantity_variable; i++)
-    {
-        comparisons /= 2;
-        bool logicError = false;
-        cout<<endl;
-        for (int d = 0; d < block; d++)
-        {
-            int tempit = comparisons;
-            for (int j = 0; j < comparisons; j++)
-            {
-                int iterationa = j + comparisons * d * 2;
-                int iterationb = tempit + comparisons * d * 2;
-                if (kit_table[iterationa].back() != kit_table[iterationb].back())
-                {
-                    cout << endl <<"syt x"<< i+1 << endl;
-                    syvar.push_back(i);
-
-                    for (int k = 0; k < kit_table[iterationa].size(); k++)
-                        cout << kit_table[iterationa][k];
-                    cout << " != ";
-                    for (int k = 0; k < kit_table[iterationb].size(); k++)
-                        cout << kit_table[iterationb][k];
-
-                    logicError = true;
-                    result++;
-                    break;
-                }
-
-                cout<<endl;
-                for (int k = 0; k < kit_table[iterationa].size(); k++)
-                    cout << kit_table[iterationa][k];
-                cout << " == ";
-                for (int k = 0; k < kit_table[iterationb].size(); k++)
-                    cout << kit_table[iterationb][k];
-                tempit++;
-            }
-
-            if (logicError){break;}
-        }
-        block *= 2;
-    }
-    cout << endl << "result syt: "<<result << endl;
-    return result;
-}
 void Bool_Table::Random_Func()
 {
     srand(static_cast<unsigned int>(time(nullptr)));
@@ -146,22 +97,51 @@ void Bool_Table::Random_Func()
 
     cout << "Random function f(x) assigned to each row.\n";
 }
-void Bool_Table::true_function(vector<vector<int>> temp_kit, vector<int> syvar)
+void Bool_Table::Kvine_Mak_Klaski()
 {
-    for (int i = 0; i < kit_table.size(); i++)
+    vector<vector<int>> temp_one_kit;
+    vector<vector<vector<int>>> temp_var_kit;
+    vector<vector<int>> block;
+    vector<int> qvar;
+
+    for (vector kit: kit_table)
     {
-        for (int j = 0; j < temp_kit.size(); j++)
+        if (kit.back() == 0)
+            continue;
+        kit.pop_back();
+        temp_one_kit.push_back(kit);
+    }
+
+    kit_table.clear();
+    for (int d = 0; d < quantity_variable + 1; d++)
+    {
+
+        for (vector kit: temp_one_kit)
         {
-            int boolfunc = 0;
-            for (int k = 0; k < syvar.size(); k++)
+            int second_var = 0;
+            for (int i : kit)
             {
-                if (kit_table[i][k] == temp_kit[j][syvar[k]])
-                    boolfunc++;
+                if (i == 1)
+                    second_var++;
             }
-            if (boolfunc == syvar.size())
+            if (second_var == d)
+                block.push_back(kit);
+        }
+
+        if (block.size() != 0)
+        {
+            temp_var_kit.push_back(block);
+        }
+        block.clear();
+    }
+
+    for (int block = 0; block < temp_var_kit.size(); block++)
+    {
+        for (int kit = 0; kit < temp_var_kit[block].size(); kit++)
+        {
+            for (int k : temp_var_kit[block][kit])
             {
-                kit_table[i].push_back(temp_kit[j].back());
-                break;
+
             }
         }
     }
