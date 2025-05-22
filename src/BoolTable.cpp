@@ -109,6 +109,8 @@ void Bool_Table::Kvine_Mak_Klaski()
     vector<vector<int>> temp_kit;
     vector<vector<int>> temp_var_kit2;
     vector<vector<int>> f_result;
+
+    //delete 0 const
     for (vector kit: kit_table)
     {
         if (kit.back() == 0)
@@ -118,6 +120,7 @@ void Bool_Table::Kvine_Mak_Klaski()
     }
 
     kit_table.clear();
+    //block
     for (int d = 0; d < quantity_variable + 1; d++)
     {
 
@@ -137,7 +140,7 @@ void Bool_Table::Kvine_Mak_Klaski()
 
         block.clear();
     }
-
+    //firt comparison
     for (int block = 0; block + 1< temp_var_kit.size(); block++)
     {
         for (int kit = 0; kit < temp_var_kit[block].size(); kit++)
@@ -162,6 +165,7 @@ void Bool_Table::Kvine_Mak_Klaski()
         }
     }
 
+    //moving items into the same container
     for (vector block: temp_var_kit)
         for (vector kit: block)
             first_temp_kit.push_back(kit);
@@ -170,6 +174,7 @@ void Bool_Table::Kvine_Mak_Klaski()
     sort(first_kit.begin(), first_kit.end());
     first_kit.erase(unique(first_kit.begin(), first_kit.end()), first_kit.end());
 
+    //Search for unused
     for (vector kit: first_temp_kit)
     {
         int var = 0;
@@ -186,6 +191,7 @@ void Bool_Table::Kvine_Mak_Klaski()
     first_temp_kit.clear();
     qvar.clear();
 
+    //Allocation to missing elements
     for (vector kit: comparison_kit)
     {
         vector<vector<int>> copy;
@@ -214,6 +220,8 @@ void Bool_Table::Kvine_Mak_Klaski()
             temp_var_kit.push_back(copy);
     }
     qvar.clear();
+
+    //second comparison
     for (vector block: temp_var_kit)
     {
         vector<int> copy;
@@ -244,10 +252,12 @@ void Bool_Table::Kvine_Mak_Klaski()
     sort(temp_one_kit.begin(), temp_one_kit.end());
     temp_one_kit.erase(unique(temp_one_kit.begin(), temp_one_kit.end()), temp_one_kit.end());
 
+    //moving items into the same container
     for (vector block : temp_var_kit)
         for (vector kit : block)
             temp_var_kit2.push_back(kit);
 
+    //Search for unused
     for (vector kit : temp_var_kit2)
     {
         int var = 0;
