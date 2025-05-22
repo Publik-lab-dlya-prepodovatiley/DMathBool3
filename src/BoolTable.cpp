@@ -107,7 +107,7 @@ void Bool_Table::Kvine_Mak_Klaski()
     vector<vector<int>> first_kit;
     vector<vector<int>> first_temp_kit;
     vector<vector<int>> temp_kit;
-
+    vector<vector<int>> f_result;
     for (vector kit: kit_table)
     {
         if (kit.back() == 0)
@@ -211,6 +211,33 @@ void Bool_Table::Kvine_Mak_Klaski()
         }
         if (!copy.empty())
             temp_var_kit.push_back(copy);
+    }
+    qvar.clear();
+    for (vector block: temp_var_kit)
+    {
+        int var = 0;
+        int var2 = 0;
+        vector<int> copy;
+        for (vector kit: block)
+        {
+            for (vector kit2: block)
+            {
+                for (int i = 0; i < kit.size(); i++)
+                {
+                    if (kit[i] != kit2[i])
+                        syvar.push_back(i);
+                }
+                if (syvar.size() == 1)
+                {
+                    vector<int> copy = kit;
+                    copy[syvar[0]] = 2;
+                    f_result.push_back(copy);
+                    temp_one_kit.push_back(kit);
+                    temp_one_kit.push_back(kit2);
+                    syvar.clear();
+                }
+            }
+        }
     }
 }
 
