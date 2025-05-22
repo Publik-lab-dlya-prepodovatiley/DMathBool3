@@ -4,6 +4,8 @@
 #include "vector"
 #include "cmath"
 #include <algorithm>
+#include <utility>
+
 using namespace std;
 
 class Bool_Table

@@ -183,7 +183,34 @@ void Bool_Table::Kvine_Mak_Klaski()
     temp_one_kit.clear();
     first_kit.clear();
     first_temp_kit.clear();
+    qvar.clear();
 
+    for (vector kit: comparison_kit)
+    {
+        vector<vector<int>> copy;
+        int var = 0;
+        for (int element: kit)
+        {
+            if (element == 2)
+                break;
+            var++;
+        }
 
+        bool flag = false;
+        for (int i : qvar)
+            if (i == var)
+                flag = true;
+        if (flag)
+            continue;
+        qvar.push_back(var);
+
+        for (vector kit2 : comparison_kit)
+        {
+            if (kit2[var] == 2)
+                copy.push_back(kit2);
+        }
+        if (!copy.empty())
+            temp_var_kit.push_back(copy);
+    }
 }
 
