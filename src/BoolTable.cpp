@@ -103,6 +103,10 @@ void Bool_Table::Kvine_Mak_Klaski()
     vector<vector<vector<int>>> temp_var_kit;
     vector<vector<int>> block;
     vector<int> qvar;
+    vector<vector<int>> comparison_kit;
+    vector<vector<int>> first_kit;
+    vector<vector<int>> first_temp_kit;
+    vector<vector<int>> temp_kit;
 
     for (vector kit: kit_table)
     {
@@ -120,33 +124,66 @@ void Bool_Table::Kvine_Mak_Klaski()
         {
             int second_var = 0;
             for (int i : kit)
-            {
                 if (i == 1)
                     second_var++;
-            }
+
             if (second_var == d)
                 block.push_back(kit);
         }
 
         if (block.size() != 0)
-        {
             temp_var_kit.push_back(block);
-        }
+
         block.clear();
     }
-    int var = 0;
+
     for (int block = 0; block < temp_var_kit.size(); block++)
     {
         for (int kit = 0; kit < temp_var_kit[block].size(); kit++)
         {
-            for (int first_element = 0; first_element < temp_var_kit[block][kit].size(); first_element++)
+            for (int second_kit = 0; second_kit < temp_var_kit[block + 1].size(); ++second_kit) //2
             {
-                for (int kit_element = 0; kit_element < temp_var_kit[block + 1][kit].size(); ++kit_element)
+                for (int i = 0; i < temp_var_kit[block][kit].size(); ++i)
                 {
-                    if (temp_var_kit[block][kit][first_element] != temp_var_kit[block+1][kit][first_element])
-                        var++;
+                    if (temp_var_kit[block][kit][i] != temp_var_kit[block + 1][second_kit][i])
+                        qvar.push_back(i);
                 }
+                if (qvar.size() == 1)
+                {
+                    first_kit.push_back(temp_var_kit[block][kit]);
+                    first_kit.push_back(temp_var_kit[block + 1][second_kit]);
+                    vector<int> copy = temp_var_kit[block][kit];
+                    copy[qvar[0]] = 2;
+                    comparison_kit.push_back(copy);
+                }
+                qvar.clear();
             }
         }
     }
+
+    for (vector block: temp_var_kit)
+        for (vector kit: block)
+            first_temp_kit.push_back(kit);
+    temp_var_kit.clear();
+
+    sort(first_kit.begin(), first_kit.end());
+    first_kit.erase(unique(first_kit.begin(), first_kit.end()), first_kit.end());
+
+    for (vector kit: first_temp_kit)
+    {
+        int var = 0;
+        for (vector kit2: first_kit)
+        {
+            if (kit == kit2)
+                var++;
+        }
+        if (var == 0)
+            temp_kit.push_back(kit);
+    }
+    temp_one_kit.clear();
+    first_kit.clear();
+    first_temp_kit.clear();
+
+
 }
+
