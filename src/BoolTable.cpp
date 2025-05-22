@@ -134,14 +134,18 @@ void Bool_Table::Kvine_Mak_Klaski()
         }
         block.clear();
     }
-
+    int var = 0;
     for (int block = 0; block < temp_var_kit.size(); block++)
     {
         for (int kit = 0; kit < temp_var_kit[block].size(); kit++)
         {
-            for (int k : temp_var_kit[block][kit])
+            for (int first_element = 0; first_element < temp_var_kit[block][kit].size(); first_element++)
             {
-
+                for (int kit_element = 0; kit_element < temp_var_kit[block + 1][kit].size(); ++kit_element)
+                {
+                    if (temp_var_kit[block][kit][first_element] != temp_var_kit[block+1][kit][first_element])
+                        var++;
+                }
             }
         }
     }
