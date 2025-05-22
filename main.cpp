@@ -25,7 +25,7 @@ int main()
     }while (mode != 1 && mode != 2);
 
     table.Print_table(table.syvar);
-    cout << "1 - manual  ||  2 - randomly" << endl;
+    cout << "D short" << endl;
     table.Kvine_Mak_Klaski();
     cin.get();
     return 0;
