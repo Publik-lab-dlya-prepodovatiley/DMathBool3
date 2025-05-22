@@ -107,6 +107,7 @@ void Bool_Table::Kvine_Mak_Klaski()
     vector<vector<int>> first_kit;
     vector<vector<int>> first_temp_kit;
     vector<vector<int>> temp_kit;
+    vector<vector<int>> temp_var_kit2;
     vector<vector<int>> f_result;
     for (vector kit: kit_table)
     {
@@ -137,7 +138,7 @@ void Bool_Table::Kvine_Mak_Klaski()
         block.clear();
     }
 
-    for (int block = 0; block < temp_var_kit.size(); block++)
+    for (int block = 0; block + 1< temp_var_kit.size(); block++)
     {
         for (int kit = 0; kit < temp_var_kit[block].size(); kit++)
         {
@@ -238,6 +239,46 @@ void Bool_Table::Kvine_Mak_Klaski()
                 }
             }
         }
+    }
+    sort(f_result.begin(), f_result.end());
+    f_result.erase(unique(f_result.begin(), f_result.end()), f_result.end());
+
+    sort(temp_one_kit.begin(), temp_one_kit.end());
+    temp_one_kit.erase(unique(temp_one_kit.begin(), temp_one_kit.end()), temp_one_kit.end());
+
+    for (vector block : temp_var_kit)
+        for (vector kit : block)
+            temp_var_kit2.push_back(kit);
+
+    for (vector kit : temp_var_kit2)
+    {
+        int var = 0;
+        for (vector kit2 : temp_one_kit)
+        {
+            if (kit == kit2)
+                var++;
+        }
+        if (var == 0)
+            f_result.push_back(kit);
+    }
+
+    for (vector kit : temp_kit)
+        f_result.push_back(kit);
+    int it = 0;
+    for (vector kit : f_result)
+    {
+        int var = 0;
+        for (int i : kit)
+        {
+            if (i == 0)
+                cout <<"-X"<<var + 1<<" ";
+            else if (i == 1)
+                cout <<"X"<<var + 1<<" ";
+            var++;
+        }
+        it++;
+        if (it != f_result.size())
+            cout << "V ";
     }
 }
 
